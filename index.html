@@ -30,12 +30,35 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',system-ui,sans-serif;background:#0f0f0f;color:#e5e5e5;line-height:1.6;overflow-x:hidden}
 .container{max-width:800px;margin:0 auto;padding:40px 20px}
-header{text-align:center;padding:60px 0 40px;border-bottom:1px solid #222}
+header{text-align:center;padding:60px 0 36px;border-bottom:1px solid #222}
 h1{font-size:48px;font-weight:700;letter-spacing:-1px;color:#fff}
 h1 span{color:#a78bfa}
 .subtitle{color:#888;margin-top:8px;font-size:16px}
-.card{background:#171717;border:1px solid #222;border-radius:16px;padding:28px;margin:32px 0;overflow:hidden}
+.btn-primary{display:inline-block;background:#fff;color:#000;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;margin-top:16px;transition:0.2s}
+.btn-primary:hover{background:#e5e5e5}
+
+/* TABS - abaixo da linha */
+.tabs-wrapper{border-bottom:1px solid #222;position:sticky;top:0;background:rgba(15,15,15,0.9);backdrop-filter:blur(10px);z-index:10;margin:0 -20px;padding:0 20px}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:12px 0}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{background:transparent;border:1px solid transparent;color:#888;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:0.2s}
+.tab-btn:hover{color:#fff;background:#1a1a1a}
+.tab-btn.active{background:#1e1e1e;color:#fff;border-color:#2a2a2a}
+
+/* Conteúdo das abas */
+.tab-pane{display:none;animation:fade 0.2s ease}
+.tab-pane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:#171717;border:1px solid #222;border-radius:16px;padding:28px;margin:28px 0;overflow:hidden}
 .card h2{font-size:18px;font-weight:600;margin-bottom:16px;color:#fff}
+.card h3{font-size:15px;font-weight:600;color:#fff;margin:18px 0 8px}
+.card p,.card li{font-size:14px;color:#9a9a9a;line-height:1.7}
+.card ul{list-style:none;padding:0}
+.card li{padding:6px 0;border-bottom:1px solid #1e1e1e}
+.card li:last-child{border:0}
+.muted{color:#666;font-size:13px}
+
 .ip-list{display:flex;flex-direction:column;gap:12px}
 .ip-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:12px;padding:14px 16px;min-width:0}
 .ip-item > div:first-child{flex:1;min-width:0}
@@ -44,22 +67,29 @@ h1 span{color:#a78bfa}
 .ip-item button{background:#fff;color:#000;border:0;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;white-space:nowrap}
 .ip-item button:hover{background:#e5e5e5}
 .ip-item button.copied{background:#a78bfa;color:#fff}
-.btn-primary{display:inline-block;background:#fff;color:#000;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;margin-top:16px;transition:0.2s}
-.btn-primary:hover{background:#e5e5e5}
+
 .features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .feat{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:18px;min-width:0}
 .feat h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:0.3px}
-.feat p{font-size:13px;color:#888;line-height:1.5;word-break:break-word}
-footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px solid #222;margin-top:48px}
+.feat p{font-size:13px;color:#888;line-height:1.5}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.info-box{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:12px;padding:16px}
+.info-box .k{font-size:11px;color:#888;text-transform:uppercase;font-weight:600;letter-spacing:0.5px}
+.info-box .v{font-size:14px;color:#fff;margin-top:4px;font-weight:600;word-break:break-all}
+.info-box .d{font-size:12px;color:#777;margin-top:2px}
+
+footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px solid #222;margin-top:32px}
+
 @media(max-width:600px){
   .container{padding:24px 16px}
   header{padding:36px 0 28px}
   h1{font-size:34px}
   .card{padding:20px;margin:20px 0;border-radius:14px}
-  .features{grid-template-columns:1fr;gap:10px}
+  .features,.info-grid{grid-template-columns:1fr;gap:10px}
   .ip-item{flex-direction:row;align-items:center;padding:12px 14px}
   .ip-item .value{font-size:12.5px}
-  .ip-item button{padding:8px 12px;font-size:12px}
+  .tabs-wrapper{margin:0 -16px;padding:0 16px}
 }
 @media(max-width:380px){
   .ip-item{flex-direction:column;align-items:stretch}
@@ -72,49 +102,109 @@ footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px
 <header>
 <h1>MYTHIC <span>SMP</span></h1>
 <p class="subtitle">Survival • Clãs • Economia • Loja</p>
-<a href="https://discord.gg/DzwV9N48D" target="_blank" class="btn-primary" id="discordBtn">Entrar no Discord</a>
+<a href="https://discord.gg/DzwV9N48D" target="_blank" class="btn-primary">Entrar no Discord</a>
 </header>
 
-<div class="card">
-<h2>Servidor</h2>
-<div class="ip-list">
-<div class="ip-item">
-<div>
-<div class="label">Java</div>
-<div class="value" id="javaIp">mythicsurvivalmp.minekeep.gg</div>
-</div>
-<button onclick="copyIp('javaIp', this)">Copiar</button>
-</div>
-<div class="ip-item">
-<div>
-<div class="label">Bedrock • Porta 19132</div>
-<div class="value" id="bedIp">mythicsurvivalmp.bedrock.minekeep.gg</div>
-</div>
-<button onclick="copyIp('bedIp', this)">Copiar</button>
-</div>
-</div>
+<div class="tabs-wrapper">
+<nav class="tabs">
+<button class="tab-btn active" data-tab="inicio">Página inicial</button>
+<button class="tab-btn" data-tab="quem">Quem somos</button>
+<button class="tab-btn" data-tab="info">Informações gerais</button>
+</nav>
 </div>
 
-<div class="card">
-<h2>Recursos</h2>
-<div class="features">
-<div class="feat"><h3>PERFIL</h3><p>Nick, Dinheiro, Caixas, Clã e Cargo no scoreboard.</p></div>
-<div class="feat"><h3>CLÃS</h3><p>/cla criar, lista, solicitar, aceitar e gerenciar seu clã.</p></div>
-<div class="feat"><h3>LOJA</h3><p>/loja lista e /loja comprar com códigos organizados.</p></div>
-<div class="feat"><h3>CAIXAS</h3><p>/caixa abrir, ver recompensas e sistema de prêmios.</p></div>
-<div class="feat"><h3>TELEPORTE</h3><p>/tp1 e /tp2 com confirmação e expiração em 30s.</p></div>
-<div class="feat"><h3>ECONOMIA</h3><p>/dinheiro ver, pix e sistema completo.</p></div>
-</div>
+<!-- ABA: INICIO -->
+<div id="tab-inicio" class="tab-pane active">
+  <div class="card">
+  <h2>Servidor</h2>
+  <div class="ip-list">
+    <div class="ip-item">
+      <div><div class="label">Java</div><div class="value" id="javaIp">mythicsurvivalmp.minekeep.gg</div></div>
+      <button onclick="copyIp('javaIp', this)">Copiar</button>
+    </div>
+    <div class="ip-item">
+      <div><div class="label">Bedrock • Porta 19132</div><div class="value" id="bedIp">mythicsurvivalmp.bedrock.minekeep.gg</div></div>
+      <button onclick="copyIp('bedIp', this)">Copiar</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="card">
+  <h2>Recursos</h2>
+  <div class="features">
+    <div class="feat"><h3>CLÃS</h3><p>Crie seu grupo, junte amigos e evolua junto no servidor.</p></div>
+    <div class="feat"><h3>ECONOMIA</h3><p>Dinheiro, trocas e negociações entre jogadores de forma justa.</p></div>
+    <div class="feat"><h3>LOJA</h3><p>Itens organizados para comprar e vender sem complicação.</p></div>
+    <div class="feat"><h3>CAIXAS</h3><p>Recompensas especiais e prêmios que você conquista jogando.</p></div>
+    <div class="feat"><h3>PERFIL</h3><p>Suas informações essenciais sempre visíveis e organizadas.</p></div>
+    <div class="feat" style="background:#222;border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center"><h3 style="color:#a78bfa">E MUITO MAIS</h3><p>Teleporte, eventos, cargos e muito mais te esperando.</p></div>
+  </div>
+  </div>
+
+  <div class="card">
+  <h2>Como entrar</h2>
+  <p>Java: Adicione o IP nas configurações de multiplayer. Bedrock: Adicione como servidor externo com o IP e porta 19132.</p>
+  </div>
 </div>
 
-<div class="card">
-<h2>Como entrar</h2>
-<p style="font-size:14px;color:#888">Java: Adicione o IP nas configurações de multiplayer. Bedrock: Adicione como servidor externo com o IP e porta 19132.</p>
+<!-- ABA: QUEM SOMOS -->
+<div id="tab-quem" class="tab-pane">
+  <div class="card">
+  <h2>Quem somos</h2>
+  <p>MYTHIC SMP é um servidor Survival focado em comunidade, criado para ser estável, justo e divertido por muito tempo.</p>
+  <h3>Nossa ideia</h3>
+  <p>Queremos um survival onde você pode jogar do seu jeito: construir sozinho, criar um clã gigante, dominar a economia com loja, ou caçar caixas raras. O foco é a experiência vanilla melhorada para todo mundo se divertir.</p>
+  <h3>O que nos diferencia</h3>
+  <ul>
+    <li>🏰 <b style="color:#fff">Clãs de verdade:</b> sistema /cla completo, sem clã fake</li>
+    <li>💰 <b style="color:#fff">Economia controlada:</b> dinheiro, pix entre players e loja com preços justos</li>
+    <li>📦 <b style="color:#fff">Caixas:</b> recompensas que não quebram o jogo</li>
+    <li>🛡️ <b style="color:#fff">Comunidade:</b> Discord ativo, suporte rápido e eventos</li>
+  </ul>
+  <h3>Equipe</h3>
+  <p>Donos e staff jogam junto com a comunidade. Cargo no Discord é sincronizado com o jogo via scoreboard.</p>
+  <p class="muted" style="margin-top:16px">Fundado em 2025 • Crossplay Java + Bedrock</p>
+  </div>
 </div>
 
-<footer>
-mythic.minekeep.gg • MYTHIC SMP © 2026
-</footer>
+<!-- ABA: INFO GERAIS -->
+<div id="tab-info" class="tab-pane">
+  <div class="card">
+  <h2>Informações gerais</h2>
+  <p>Informações técnicas para entrar sem erro.</p>
+  
+  <div class="info-grid">
+    <div class="info-box"><div class="k">Java IP</div><div class="v">mythicsurvivalmp.minekeep.gg</div><div class="d">Copie e cole no multiplayer</div></div>
+    <div class="info-box"><div class="k">Bedrock IP</div><div class="v">mythicsurvivalmp.bedrock.minekeep.gg</div><div class="d">Porta 19132</div></div>
+    <div class="info-box"><div class="k">Versão Java</div><div class="v">26.2</div><div class="d">Java Edition</div></div>
+    <div class="info-box"><div class="k">Versão Bedrock</div><div class="v">20.30 até 26.52</div><div class="d">Bedrock Edition</div></div>
+    <div class="info-box"><div class="k">Tipo</div><div class="v">SMP Survival</div><div class="d">Vanilla melhorado</div></div>
+    <div class="info-box"><div class="k">Crossplay</div><div class="v">Sim, Java + Bedrock</div><div class="d">Mesmo mundo</div></div>
+  </div>
+
+  <h3>Requisitos</h3>
+  <ul>
+    <li>Java original ou Bedrock original</li>
+    <li>Conta no Discord para pegar cargo e suporte</li>
+    <li>Não precisa de mods ou resource pack</li>
+  </ul>
+
+  <h3>Comandos principais</h3>
+  <ul>
+    <li><code>/ip</code> - ver IPs no jogo</li>
+    <li><code>/cla</code> - sistema de clãs</li>
+    <li><code>/loja</code> - loja do servidor</li>
+    <li><code>/caixa</code> - abrir caixas</li>
+    <li><code>/dinheiro</code> - ver saldo e pix</li>
+    <li><code>/tp1 /tp2</code> - pedidos de teleporte</li>
+  </ul>
+
+  <h3>Regras resumidas</h3>
+  <p>Sem x-ray, sem hack, sem grief em área protegida, sem spam. Respeite os clãs e a economia. Staff decide em caso de dúvida.</p>
+  </div>
+</div>
+
+<footer>MYTHIC SMP © 2026</footer>
 </div>
 
 <script>
@@ -124,9 +214,20 @@ function copyIp(id, btn){
     const original = btn.innerText;
     btn.innerText = 'Copiado!';
     btn.classList.add('copied');
-    setTimeout(()=>{btn.innerText = original; btn.classList.remove('copied')}, 1800);
+    setTimeout(()=>{btn.innerText = original; btn.classList.remove('copied')},1800);
   });
 }
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    window.scrollTo({top:140, behavior:'smooth'});
+  });
+});
 </script>
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
-</html>
+                                       </html>
+                                       
