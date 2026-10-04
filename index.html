@@ -28,29 +28,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:#0f0f0f;color:#e5e5e5;line-height:1.6}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f0f;color:#e5e5e5;line-height:1.6;overflow-x:hidden}
 .container{max-width:800px;margin:0 auto;padding:40px 20px}
 header{text-align:center;padding:60px 0 40px;border-bottom:1px solid #222}
 h1{font-size:48px;font-weight:700;letter-spacing:-1px;color:#fff}
 h1 span{color:#a78bfa}
 .subtitle{color:#888;margin-top:8px;font-size:16px}
-.card{background:#171717;border:1px solid #222;border-radius:16px;padding:28px;margin:32px 0}
+.card{background:#171717;border:1px solid #222;border-radius:16px;padding:28px;margin:32px 0;overflow:hidden}
 .card h2{font-size:18px;font-weight:600;margin-bottom:16px;color:#fff}
 .ip-list{display:flex;flex-direction:column;gap:12px}
-.ip-item{display:flex;justify-content:space-between;align-items:center;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px}
-.ip-item .label{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px}
-.ip-item .value{font-family:monospace;font-size:14px;color:#fff;margin-top:2px}
-.ip-item button{background:#fff;color:#000;border:0;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:0.2s}
+.ip-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:12px;padding:14px 16px;min-width:0}
+.ip-item > div:first-child{flex:1;min-width:0}
+.ip-item .label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.6px;font-weight:600}
+.ip-item .value{font-family:monospace;font-size:13px;color:#fff;margin-top:4px;word-break:break-all;overflow-wrap:anywhere;line-height:1.4}
+.ip-item button{background:#fff;color:#000;border:0;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;white-space:nowrap}
 .ip-item button:hover{background:#e5e5e5}
 .ip-item button.copied{background:#a78bfa;color:#fff}
 .btn-primary{display:inline-block;background:#fff;color:#000;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;margin-top:16px;transition:0.2s}
 .btn-primary:hover{background:#e5e5e5}
 .features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.feat{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:18px}
-.feat h3{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
-.feat p{font-size:13px;color:#888}
+.feat{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:18px;min-width:0}
+.feat h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:0.3px}
+.feat p{font-size:13px;color:#888;line-height:1.5;word-break:break-word}
 footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px solid #222;margin-top:48px}
-@media(max-width:600px){h1{font-size:36px}.features{grid-template-columns:1fr}.ip-item{flex-direction:column;align-items:flex-start;gap:10px}}
+@media(max-width:600px){
+  .container{padding:24px 16px}
+  header{padding:36px 0 28px}
+  h1{font-size:34px}
+  .card{padding:20px;margin:20px 0;border-radius:14px}
+  .features{grid-template-columns:1fr;gap:10px}
+  .ip-item{flex-direction:row;align-items:center;padding:12px 14px}
+  .ip-item .value{font-size:12.5px}
+  .ip-item button{padding:8px 12px;font-size:12px}
+}
+@media(max-width:380px){
+  .ip-item{flex-direction:column;align-items:stretch}
+  .ip-item button{width:100%;margin-top:8px}
+}
 </style>
 </head>
 <body>
@@ -73,17 +87,10 @@ footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px
 </div>
 <div class="ip-item">
 <div>
-<div class="label">Bedrock</div>
+<div class="label">Bedrock • Porta 19132</div>
 <div class="value" id="bedIp">mythicsurvivalmp.bedrock.minekeep.gg</div>
 </div>
 <button onclick="copyIp('bedIp', this)">Copiar</button>
-</div>
-<div class="ip-item">
-<div>
-<div class="label">Porta Bedrock & Online</div>
-<div class="value">19132 • <span id="online">Online: veja no jogo</span></div>
-</div>
-<div class="label">Java & Bedrock</div>
 </div>
 </div>
 </div>
