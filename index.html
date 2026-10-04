@@ -1,1 +1,130 @@
-a
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYTHIC SMP - Site Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f0f0f;color:#e5e5e5;line-height:1.6}
+.container{max-width:800px;margin:0 auto;padding:40px 20px}
+header{text-align:center;padding:60px 0 40px;border-bottom:1px solid #222}
+h1{font-size:48px;font-weight:700;letter-spacing:-1px;color:#fff}
+h1 span{color:#a78bfa}
+.subtitle{color:#888;margin-top:8px;font-size:16px}
+.card{background:#171717;border:1px solid #222;border-radius:16px;padding:28px;margin:32px 0}
+.card h2{font-size:18px;font-weight:600;margin-bottom:16px;color:#fff}
+.ip-list{display:flex;flex-direction:column;gap:12px}
+.ip-item{display:flex;justify-content:space-between;align-items:center;background:#1e1e1e;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px}
+.ip-item .label{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px}
+.ip-item .value{font-family:monospace;font-size:14px;color:#fff;margin-top:2px}
+.ip-item button{background:#fff;color:#000;border:0;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:0.2s}
+.ip-item button:hover{background:#e5e5e5}
+.ip-item button.copied{background:#a78bfa;color:#fff}
+.btn-primary{display:inline-block;background:#fff;color:#000;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;margin-top:16px;transition:0.2s}
+.btn-primary:hover{background:#e5e5e5}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.feat{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:18px}
+.feat h3{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.feat p{font-size:13px;color:#888}
+footer{text-align:center;padding:40px 0;color:#555;font-size:13px;border-top:1px solid #222;margin-top:48px}
+@media(max-width:600px){h1{font-size:36px}.features{grid-template-columns:1fr}.ip-item{flex-direction:column;align-items:flex-start;gap:10px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>MYTHIC <span>SMP</span></h1>
+<p class="subtitle">Survival • Clãs • Economia • Loja</p>
+<a href="#" class="btn-primary" id="discordBtn">Entrar no Discord</a>
+</header>
+
+<div class="card">
+<h2>Servidor</h2>
+<div class="ip-list">
+<div class="ip-item">
+<div>
+<div class="label">Java</div>
+<div class="value" id="javaIp">mythicsurvivalmp.minekeep.gg</div>
+</div>
+<button onclick="copyIp('javaIp', this)">Copiar</button>
+</div>
+<div class="ip-item">
+<div>
+<div class="label">Bedrock</div>
+<div class="value" id="bedIp">mythicsurvivalmp.bedrock.minekeep.gg</div>
+</div>
+<button onclick="copyIp('bedIp', this)">Copiar</button>
+</div>
+<div class="ip-item">
+<div>
+<div class="label">Porta Bedrock & Online</div>
+<div class="value">19132 • <span id="online">Online: veja no jogo</span></div>
+</div>
+<div class="label">Java & Bedrock</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Recursos</h2>
+<div class="features">
+<div class="feat"><h3>PERFIL</h3><p>Nick, Dinheiro, Caixas, Clã e Cargo no scoreboard.</p></div>
+<div class="feat"><h3>CLÃS</h3><p>/cla criar, lista, solicitar, aceitar e gerenciar seu clã.</p></div>
+<div class="feat"><h3>LOJA</h3><p>/loja lista e /loja comprar com códigos organizados.</p></div>
+<div class="feat"><h3>CAIXAS</h3><p>/caixa abrir, ver recompensas e sistema de prêmios.</p></div>
+<div class="feat"><h3>TELEPORTE</h3><p>/tp1 e /tp2 com confirmação e expiração em 30s.</p></div>
+<div class="feat"><h3>ECONOMIA</h3><p>/dinheiro ver, pix e sistema completo.</p></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Como entrar</h2>
+<p style="font-size:14px;color:#888">Java: Adicione o IP nas configurações de multiplayer. Bedrock: Adicione como servidor externo com o IP e porta 19132.</p>
+</div>
+
+<footer>
+mythic.minekeep.gg • MYTHIC SMP © 2026
+</footer>
+</div>
+
+<script>
+function copyIp(id, btn){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const original = btn.innerText;
+    btn.innerText = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.innerText = original; btn.classList.remove('copied')}, 1800);
+  });
+}
+document.getElementById('discordBtn').addEventListener('click', (e)=>{
+  e.preventDefault();
+  alert('Coloque aqui seu link do Discord: discord.gg/seulink');
+});
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+  </html>
+  
